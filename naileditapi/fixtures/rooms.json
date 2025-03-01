@@ -1,0 +1,32 @@
+[
+  {
+  "model": "naileditapi.room",
+  "pk": 1,
+  "fields": {
+    "name": "Kitchen",
+    "description": "where food is cooked",
+    "image": "https://assets.wfcdn.com/im/49159213/resize-h400-w400%5Ecompr-r85/3016/301668129/33%22+L+X+20%22+W+White+Fireclay+Double+Bowl+Workstation+Farmhouse+Kitchen+Sink+with+Cutting+Board+And+Dish-Drying+Rack.jpg",
+    "uid": "1"
+  }
+},
+{
+  "model": "naileditapi.room",
+  "pk": 2,
+  "fields": {
+    "name": "Living Room",
+    "description": "where people gather",
+    "image": "https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/A3000244%288%29-ALT-B?fit=fit&wid=1920&hei=1440",
+    "uid": "2"
+  }
+},
+{
+  "model": "naileditapi.room",
+  "pk": 3,
+  "fields": {
+    "name": "Bathroom",
+    "description": "where people go to freshen up",
+    "image": "https://strikingremodels.com/wp-content/uploads/2023/10/Can-I-Stay-Home-While-My-Bathroom-is-Being-Renovated.webp",
+    "uid": "3"
+  }
+}
+]

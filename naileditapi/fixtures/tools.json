@@ -1,0 +1,29 @@
+[
+  {
+  "model": "naileditapi.tool",
+  "pk": 1,
+  "fields": {
+    "name": "Hammer",
+    "description": "for making cabinet",
+    "uid": "1"
+  }
+},
+{
+  "model": "naileditapi.tool",
+  "pk": 2,
+  "fields": {
+    "name": "Drill",
+    "description": "for screwing floors",
+    "uid": "2"
+  }
+},
+{
+  "model": "naileditapi.tool",
+  "pk": 3,
+  "fields": {
+    "name": "Circular Saw",
+    "description": "for cutting wood",
+    "uid": "3"
+  }
+}
+]

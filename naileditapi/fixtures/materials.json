@@ -1,0 +1,29 @@
+[
+  {
+  "model": "naileditapi.material",
+  "pk": 1,
+  "fields": {
+    "name": "Plywood",
+    "description": "for the floor",
+    "uid": "1"
+  }
+},
+{
+  "model": "naileditapi.material",
+  "pk": 2,
+  "fields": {
+    "name": "Gray Paint",
+    "description": "for the walls",
+    "uid": "2"
+  }
+},
+{
+  "model": "naileditapi.material",
+  "pk": 3,
+  "fields": {
+    "name": "Screws",
+    "description": "for the floors",
+    "uid": "3"
+  }
+}
+]

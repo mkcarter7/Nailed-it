@@ -1,0 +1,26 @@
+[
+  {
+  "model": "naileditapi.projecttool",
+  "pk": 1,
+  "fields": {
+    "project": "1",
+    "tool": "1"
+  }
+},
+{
+  "model": "naileditapi.room",
+  "pk": 2,
+  "fields": {
+    "project": "2",
+    "tool": "2"
+  }
+},
+{
+  "model": "naileditapi.room",
+  "pk": 3,
+  "fields": {
+    "project": "3",
+    "tool": "3"
+  }
+}
+]

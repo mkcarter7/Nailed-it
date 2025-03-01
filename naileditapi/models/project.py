@@ -16,4 +16,6 @@ class Project(models.Model):
   finish_time = models.DateTimeField(null=True, blank=True)
   estimated_cost = models.DecimalField(max_digits=10, decimal_places=2, default=0)
   uid = models.CharField(max_length=30)
+  materials = models.TextField(blank=True, null=True)
+
   #STORES FIREBASE UID

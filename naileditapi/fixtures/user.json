@@ -1,0 +1,30 @@
+[
+  {
+      "model": "naileditapi.user",
+      "pk": 1,
+      "fields": {
+          "uid": 1,
+          "name": "No One",
+          "email": "nailedit@gmail.com"
+      }
+  },
+  {
+    "model": "naileditapi.user",
+    "pk": 2,
+    "fields": {
+        "uid": 2,
+        "name": "The One",
+        "email": "nailingit@gmail.com"
+    }
+},
+{
+  "model": "naileditapi.user",
+  "pk": 3,
+  "fields": {
+      "uid": 3,
+      "name": "One",
+      "email": "nail@gmail.com"
+  }
+}
+  
+]

@@ -8,7 +8,7 @@
   }
 },
 {
-  "model": "naileditapi.room",
+  "model": "naileditapi.projecttool",
   "pk": 2,
   "fields": {
     "project": "2",
@@ -16,7 +16,7 @@
   }
 },
 {
-  "model": "naileditapi.room",
+  "model": "naileditapi.projecttool",
   "pk": 3,
   "fields": {
     "project": "3",

@@ -21,7 +21,9 @@ from naileditapi.views.room import RoomView
 from naileditapi.views.tool import ToolView
 from naileditapi.views.material import MaterialView
 from naileditapi.views.project import ProjectView
+from naileditapi.views.user import UserView
 from django.urls import path
+from naileditapi.views.auth import register_user, check_user
 
 #USE BUILT IN CLASS IN DJANO SO THE SERVER RESPONDS WITH APPRORIATE METHOD
 #DFR SETS THE RESOURCE FOR EACH METHOD IN THE VIEW
@@ -32,10 +34,13 @@ router.register(r'rooms', RoomView, 'rooms')
 router.register(r'materials', MaterialView, 'materials')
 router.register(r'tools', ToolView, 'tools')
 router.register(r'project', ProjectView, 'projects')
+router.register(r'users', UserView, 'users')
+
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
-    router.register(r'projectviews', ProjectView, 'projectview')
+    path('register', register_user),
+    path('checkuser', check_user),
 ]

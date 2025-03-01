@@ -23,26 +23,36 @@ class RoomView(ViewSet):
     
     serializer = RoomSerializer(rooms, many=True)
     return Response(serializer.data)
+  
   #POST REQUESTS
   def create(self, request):
-    #VALUES FROM CLIENT/FIXTURES
+    name = request.data.get("name")
+    description = request.data.get("description")
+    image = request.data.get("image"),
+    uid = request.data.get("uid")
+
+    if not all([name, description, uid]):
+        return Response(
+            {"error": "Fields 'name', 'description', 'image' and 'uid' are required"},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
     room = Room.objects.create(
-      name=request.data["name"],
-      description=request.data["description"],
-      image=request.data["image"],
-      uid=request.data["uid"]
+        name=name,
+        description=description,
+        image=image,
+        uid=uid
     )
     serializer = RoomSerializer(room)
     return Response(serializer.data, status=status.HTTP_201_CREATED)
   
   def update(self, request, pk):
-    
-    id = pk
     room = Room.objects.get(pk=pk)
-    room.name=request.data["name"]
-    room.description = request.data["description"]
-    room.image = request.data["image"]
-    room.uid = request.data["uid"]
+
+    room.name = request.data.get("name", room.name)
+    room.description = request.data.get("description", room.description)
+    room.image = request.data.get('image', room.image)
+    room.uid = request.data.get("uid", room.uid)
     
     room.save()
     

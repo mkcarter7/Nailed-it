@@ -31,11 +31,20 @@ class ToolView(ViewSet):
   #POST.... REQUESTS
   
   def create(self, request):
-    #VALUES FROM DATA/FIXTURES
+    name = request.data.get("name")
+    description = request.data.get("description")
+    uid = request.data.get("uid")
+
+    if not all([name, description, uid]):
+        return Response(
+            {"error": "Fields 'name', 'description', and 'uid' are required"},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
     tool = Tool.objects.create(
-      name=request.data["name"],
-      description=request.data["description"],
-      uid=request.data["uid"]
+        name=name,
+        description=description,
+        uid=uid
     )
     #CREATES NEW OBJECT AND SAVES TO DATABASE
     serializer = ToolSerializer(tool)
@@ -43,15 +52,12 @@ class ToolView(ViewSet):
   #SERIALIZES AND SHOWS A CREATED 201 STATUS
   
   def update(self, request, pk):
-    #PUT...UPDATES OBJECT ATTRIBUTES
-    id = pk
     tool = Tool.objects.get(pk=pk)
-    tool.name=request.data["name"]
-    tool.description = request.data["description"]
-    tool.uid = request.data["uid"]
-    
-    tool.save()
-    #SAVES UPDATE TO DATABASE
+
+    tool.name = request.data.get("name", tool.name)
+    tool.description = request.data.get("description", tool.description)
+    tool.uid = request.data.get("uid", tool.uid)
+
     serializer = ToolSerializer(tool)    
     return Response(serializer.data, status=status.HTTP_200_OK)
   

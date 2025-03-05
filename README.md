@@ -1,38 +1,38 @@
-#NAILED IT SERVER 🔨🛠️🪚🪛🔫🔧
+# NAILED IT SERVER 🔨🛠️🪚🪛🔫🔧
 
-ABOUT
+## ABOUT
 Nailed Its is a Django web application for managing DIY home projects with user specific data. Firebase is integrated for data management and authentication.
 
 The user is able to manage their projects by room including materials and tools used.
 
-FEATURES
+## FEATURES
 User Authentication is used for the user to be able to manage their own projects. The user can manage project, room, tool and materials relationships showing a many to one relationship. The user can manage project and tool relationships that are managed through a many-many relationship. The user has full CRUD (create, read, update, delete operations) on rooms, projects, materials and tools.
 
-INSTALLATION
+## INSTALLATION
 Basic Django Set Up https://github.com/nashville-software-school/server-side-python-curriculum/blob/evening-cohorts/book-3-levelup/chapters/DRF_INSTALLS.md
 
-ERD
+## ERD
 https://dbdiagram.io/d/NAILEDIT-67ac0bfd263d6cf9a0d71261
 
-WIREFRAME
+## WIREFRAME
 https://www.figma.com/design/mdmMrUzpVJtkxMlXEYf8WU/Nalied-It?node-id=0-1&t=mtk2ykQgeDDCS9vL-1
 
-PROJECT BOARD
+## PROJECT BOARD
 https://github.com/users/mkcarter7/projects/12
 
-VIDEO WALK THROUGH WITH LOOM
+## VIDEO WALK THROUGH WITH LOOM
 
 
-API DOCUMENTS 
+## API DOCUMENTS 
 https://documenter.getpostman.com/view/33251382/2sAYdkGoc3
 
-TECH STACK
+## TECH STACK
 Django Python Postman Firebase Auth
 
-CONTRIBUTORS
+## CONTRIBUTORS
 https://github.com/mkcarter7
 
-MVP
+## MVP
 Pass the Postman Student Certification
 Use Postman to document your API (Your FE for this Capstone)
 Deploy your Postman API Documentation

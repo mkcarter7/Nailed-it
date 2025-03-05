@@ -22,6 +22,7 @@ from naileditapi.views.tool import ToolView
 from naileditapi.views.material import MaterialView
 from naileditapi.views.project import ProjectView
 from naileditapi.views.user import UserView
+from naileditapi.views.project_tool import ProjectToolView
 from django.urls import path
 from naileditapi.views.auth import register_user, check_user
 
@@ -35,6 +36,7 @@ router.register(r'materials', MaterialView, 'materials')
 router.register(r'tools', ToolView, 'tools')
 router.register(r'projects', ProjectView, 'projects')
 router.register(r'users', UserView, 'user')
+router.register(r'projecttool', ProjectToolView, 'projecttools')
 
 
 

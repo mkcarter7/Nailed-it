@@ -5,26 +5,26 @@
   "fields": {
     "name": "Kitchen",
     "description": "paint cabinets",
-    "date_started": "2025-02-28 14:30:00Z",
-    "finish_time": "2025-03-14 12:00:00Z",
+    "date_started": "2025-03-03T10:30:00Z",
+    "finish_time": "2025-03-14T12:00:00Z",
     "estimated_cost": "500.00",
-    "room_id": 1,
+    "room": 1,
     "materials": "Plywood, Gray Paint",
-    "uid": 1
+    "uid": "1"
   }
 },
 {
   "model": "naileditapi.project",
   "pk": 2,
   "fields": {
-  "name": "Bathroom",
+    "name": "Bathroom",
     "description": "fix floor and cabinet",
-    "date_started": "2025-03-06 14:30:00Z",
-    "finish_time": "2025-03-14 12:00:00Z",
+    "date_started": "2025-03-06T14:30:00Z",
+    "finish_time": "2025-03-14T12:00:00Z",
     "estimated_cost": "600.00",
-    "room_id": 2,
+    "room": 2,
     "materials": "Plywood, Screws",
-    "uid": 2
+    "uid": "2"
   }
 },
 {
@@ -33,12 +33,12 @@
   "fields": {
     "name": "Livingroom",
     "description": "fireplace",
-    "date_started": "2025-04-28 14:30:00Z",
-    "finish_time": "2025-05-10 12:00:00Z",
+    "date_started": "2025-04-28T14:30:00Z",
+    "finish_time": "2025-05-10T12:00:00Z",
     "estimated_cost": "1500.00",
-    "room_id": 1,
+    "room": 1,
     "materials": "Screws, Gray Paint",
-    "uid": 3
+    "uid": "3"
   }
 }
 ]

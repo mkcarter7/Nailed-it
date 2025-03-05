@@ -30,11 +30,11 @@ class ProjectView(ViewSet):
         date_started = request.data.get('date_started')
         finish_time = request.data.get('finish_time')
         estimated_cost = request.data.get('estimated_cost')
-        room_id = request.data.get('room')  # room_id should be fetched from the request
+        room = request.data.get('room')  # room should be fetched from the request
         materials = request.data.get('materials')
         uid = request.data.get("uid")
 
-        if not all([name, description, date_started, finish_time, estimated_cost, room_id, materials, uid]):
+        if not all([name, description, date_started, finish_time, estimated_cost, room, materials, uid]):
             return Response(
                 {"error": "Fields 'name', 'description', date_started, finish_time, estimated_cost, room, materials and 'uid' are required"},
                 status=status.HTTP_400_BAD_REQUEST
@@ -42,7 +42,7 @@ class ProjectView(ViewSet):
 
         # Retrieve the Room instance from the database using the ID
         try:
-            room = Room.objects.get(id=room_id)
+            room = Room.objects.get(id=room)
         except Room.DoesNotExist:
             return Response({"error": "Room not found."}, status=status.HTTP_404_NOT_FOUND)
 
@@ -69,17 +69,17 @@ class ProjectView(ViewSet):
         except Project.DoesNotExist:
             return Response({'message': 'Project not found'}, status=status.HTTP_404_NOT_FOUND)
 
-        # Update project fields, fetch room instance if room_id is provided
+        # Update project fields, fetch room instance if room_ is provided
         project.name = request.data.get("name", project.name)
         project.description = request.data.get("description", project.description)
         project.date_started = request.data.get("date_started", project.date_started)
         project.finish_time = request.data.get("finish_time", project.finish_time)
         project.estimated_cost = request.data.get("estimated_cost", project.estimated_cost)
 
-        room_id = request.data.get("room", None)
-        if room_id:
+        room = request.data.get("room", None)
+        if room:
             try:
-                room = Room.objects.get(id=room_id)
+                room = Room.objects.get(id=room)
                 project.room = room  # Assign the Room instance
             except Room.DoesNotExist:
                 return Response({"error": "Room not found."}, status=status.HTTP_404_NOT_FOUND)
@@ -109,11 +109,11 @@ class ProjectSerializer(serializers.ModelSerializer):
     # CONVERTS OBJECT TO JSON
     class Meta:
         model = Project
-        fields = ('id', 'name', 'description', 'date_started', 'finish_time', 'estimated_cost', 'room_id', 'materials', 'uid')
+        fields = ('id', 'name', 'description', 'date_started', 'finish_time', 'estimated_cost', 'room', 'materials', 'uid')
 
 
 class SingleProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
-        fields = ('id', 'name', 'description', 'date_started', 'finish_time', 'estimated_cost', 'room_id', 'materials', 'uid')
+        fields = ('id', 'name', 'description', 'date_started', 'finish_time', 'estimated_cost', 'room', 'materials', 'uid')
         depth = 1

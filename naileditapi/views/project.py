@@ -10,18 +10,13 @@ class ProjectView(ViewSet):
   #USE ORM TO GET DATA
   #API ENDPOINTS GET GENERATED
   def retrieve(self, request, pk):
-  #SERIALIZER CONVERTS DATA TO JSON  
     try:
-      project = Project.objects.get(pk=pk)
-      #GETS A SINGLE OBJECT FROM DATA
-      serializer = SingleProjectSerializer(project)
-      #IF OBJECT IS FOUND SERIALIZES TOOL TO JSON
-      return Response(serializer.data)
-    #SENDS JSON RESPONSE
+        project = Project.objects.get(pk=pk)
+        serializer = SingleProjectSerializer(project)
+        return Response(serializer.data)
     except Project.DoesNotExist as ex:
-      return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
-    #IF OBJECT DOES NOT EXIST AN ERROR IS SENT
-    
+        return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
+
   def list(self, request):
     #GET... ALL OJECTS FROM DATABASE. ORM IS ALL
     project = Project.objects.all()
@@ -31,51 +26,56 @@ class ProjectView(ViewSet):
   #POST.... REQUESTS
   
   def create(self, request):
-    #VALUES FROM DATA/FIXTURES
+    name = request.data.get("name")
+    description = request.data.get("description")
+    date_started = request.data.get('date_started')
+    finish_time = request.data.get('finish_time')
+    estimated_cost = request.data.get('estimated_cost')
+    room = request.data.get('room')
+    materials = request.data.get('materials')
+    uid = request.data.get("uid")
+    
+    if not all([name, description, date_started, finish_time, estimated_cost, room, materials, uid]):
+        return Response(
+            {"error": "Fields 'name', 'description', date_started, finish_time, estimated_cost, room, mateirals and 'uid' are required"},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
     project = Project.objects.create(
-      name=request.data["name"],
-      description=request.data["description"],
-      date_started=request.data["date_started"],
-      finish_time=request.data["finishe_time"],
-      estimated_cost=request.data["estimated_cost"],
-      user_id=request.data["user_id"],
-      room_id=request.data["room_id"],
-      materials=request.data["materials"],
-      uid=request.data["uid"]
+        name=name,
+        description=description,
+        date_started=date_started,
+        finish_time=finish_time,
+        estimated_cost=estimated_cost,
+        room=room,
+        materials=materials,
+        uid=uid
     )
-    if "materials" in request.data:
-      project.materials.set(request.data["materials"])  
-      #MANYTOMANY
-      
     #CREATES NEW OBJECT AND SAVES TO DATABASE
     serializer = ProjectSerializer(project)
     return Response(serializer.data, status=status.HTTP_201_CREATED)
   #SERIALIZES AND SHOWS A CREATED 201 STATUS
   
   def update(self, request, pk):
-    #PUT...UPDATES OBJECT ATTRIBUTES
-    id = pk
-    project = Project.objects.get(pk=pk)
-    project.name=request.data["name"]
-    project.description = request.data["description"]
-    project.date_started = request.data["date_started"]
-    project.finish_time = request.data["finish_time"]
-    project.estimated_cost = request.data["estimated_cost"]
-    project.user_id = request.data["user_id"]
-    project.room_id = request.data["room_id"]
-    project.materials = request.data["materials"]
-    project.uid = request.data["uid"]
+    try:
+        project = Project.objects.get(pk=pk)
+    except Project.DoesNotExist:
+        return Response({'message': 'Project not found'}, status=status.HTTP_404_NOT_FOUND)
     
+    project.name=request.data.get("name", project.name)
+    project.description=request.data.get("description", project.description)
+    project.date_started=request.data.get("date_started", project.date_started)
+    project.finish_time=request.data.get("finish_time", project.finish_time)
+    project.estimated_cost=request.data.get("estimated_cost", project.estimated_cost)
+    project.room=request.data.get("room", project.room)
+    project.materials=request.data.get("materials", project.materials)
+    project.uid=request.data.get("uid", project.uid)
+
     project.save()
-    #SAVES UPDATE TO DATABASE
     
-    #MANYTOMANY
-    if "materials" in request.data:
-      project.materials.set(request.data["materials"])  
-      
     serializer = ProjectSerializer(project)    
     return Response(serializer.data, status=status.HTTP_200_OK)
-  
+    
   def destroy(self, request, pk):
     #DELETE....FETCHES THE OBJECT FROM DATABASE AND DELETES
     project = Project.objects.get(pk=pk)
@@ -87,11 +87,11 @@ class ProjectSerializer(serializers.ModelSerializer):
   #CONVERTS OBJECT TO JSON
   class Meta:
     model = Project
-    fields = ('id', 'name', 'description', 'date_started', 'finish_time', 'estimated_cost', 'user_id', 'room_id', 'materials', 'uid')
+    fields = ('id', 'name', 'description', 'date_started', 'finish_time', 'estimated_cost', 'room_id', 'materials', 'uid')
     
 class SingleProjectSerializer(serializers.ModelSerializer):
   
   class Meta:
     model = Project
-    fields = ('id', 'name', 'description', 'date_started', 'finish_time', 'estimated_cost', 'user_id', 'room_id', 'materials', 'uid')
+    fields = ('id', 'name', 'description', 'date_started', 'finish_time', 'estimated_cost', 'room_id', 'materials', 'uid')
     depth = 1

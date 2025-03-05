@@ -33,8 +33,8 @@ router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'rooms', RoomView, 'rooms')
 router.register(r'materials', MaterialView, 'materials')
 router.register(r'tools', ToolView, 'tools')
-router.register(r'project', ProjectView, 'projects')
-router.register(r'users', UserView, 'users')
+router.register(r'projects', ProjectView, 'projects')
+router.register(r'users', UserView, 'user')
 
 
 

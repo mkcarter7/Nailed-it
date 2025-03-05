@@ -1,56 +1,46 @@
 # This code was generated with the assistance of ChatGPT
 from rest_framework.test import APITestCase
 from rest_framework import status
-from naileditapi.models import User
-from django.urls import reverse
+from naileditapi.models.user import User
 
-class UserViewSetTest(APITestCase):
+class UserTests(APITestCase):
 
     def setUp(self):
-        # Create user
-        self.user = User.objects.create_user(
-            username='testuser',
-            password='password123',
-            email='testuser@example.com'
-        )
-        self.url = reverse('user-list')
+        """Set up test data"""
+        self.user1 = User.objects.create(uid="12345", name="John Doe", email="john@example.com")
+        self.user2 = User.objects.create(uid="67890", name="Jane Doe", email="jane@example.com")
 
-    def test_create_user(self):
-        data = {
-            'username': 'newuser',
-            'password': 'password123',
-            'email': 'newuser@example.com'
-        }
-        response = self.client.post(self.url, data, format='json')
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(response.data['username'], data['username'])
-        self.assertEqual(response.data['email'], data['email'])
-        self.assertNotIn('password', response.data)  # Ensure password is not returned
-
-    def test_get_users(self):
-        response = self.client.get(self.url)
+    def test_list_users(self):
+        """Test retrieving the list of users"""
+        response = self.client.get("/users")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 1)  # Only one user in the setup
+        self.assertEqual(len(response.data), 2)
 
-    def test_get_user(self):
-        response = self.client.get(reverse('user-detail', args=[self.user.id]))
+    def test_list_users_with_uid_filter(self):
+        """Test retrieving users filtered by uid"""
+        response = self.client.get(f"/users?uid={self.user1.uid}")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data['username'], self.user.username)
-        self.assertEqual(response.data['email'], self.user.email)
+        self.assertEqual(len(response.data), 1)
+        self.assertEqual(response.data[0]['uid'], self.user1.uid)
 
-    def test_update_user(self):
-        data = {
-            'username': 'updateduser',
-            'email': 'updateduser@example.com'
-        }
-        response = self.client.put(reverse('user-detail', args=[self.user.id]), data, format='json')
+    def test_retrieve_user(self):
+        """Test retrieving a single user by id"""
+        response = self.client.get(f"/users/{self.user1.id}")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data['username'], data['username'])
-        self.assertEqual(response.data['email'], data['email'])
+        self.assertEqual(response.data["name"], self.user1.name)
+        self.assertEqual(response.data["email"], self.user1.email)
+
+    def test_retrieve_non_existent_user(self):
+        """Test retrieving a user that does not exist"""
+        response = self.client.get("/users/999")
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
     def test_delete_user(self):
-        response = self.client.delete(reverse('user-detail', args=[self.user.id]))
+        """Test deleting a user"""
+        response = self.client.delete(f"/users/{self.user1.id}")
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
-        # Verify the user has been deleted
-        response = self.client.get(reverse('user-detail', args=[self.user.id]))
+
+        # Verify user is deleted
+        response = self.client.get(f"/users/{self.user1.id}")
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+

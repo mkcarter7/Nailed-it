@@ -28,7 +28,7 @@ class RoomView(ViewSet):
   def create(self, request):
     name = request.data.get("name")
     description = request.data.get("description")
-    image = request.data.get("image"),
+    image = request.data.get("image")
     uid = request.data.get("uid")
 
     if not all([name, description, uid]):

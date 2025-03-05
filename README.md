@@ -21,7 +21,8 @@ https://www.figma.com/design/mdmMrUzpVJtkxMlXEYf8WU/Nalied-It?node-id=0-1&t=mtk2
 https://github.com/users/mkcarter7/projects/12
 
 ## VIDEO WALK THROUGH WITH LOOM
-
+https://www.loom.com/share/2b5d95ea25c5481f9ac01942f315f423?sid=3f31fde2-1aa4-4b88-ba5d-a873997eafb1
+https://www.loom.com/share/b0e9d66bfb5f4e84a6f7abbda9922e2e?sid=ab3ad0ee-9380-47a1-bbcc-81e5f49fd278
 
 ## API DOCUMENTS 
 https://documenter.getpostman.com/view/33251382/2sAYdkGoc3
